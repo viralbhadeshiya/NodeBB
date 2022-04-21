@@ -40,4 +40,8 @@ module.exports = function (User) {
 		const isOnline = uid.map((uid, index) => (now - lastonline[index]) < (meta.config.onlineCutoff * 60000));
 		return isArray ? isOnline : isOnline[0];
 	};
+
+	User.incrementLoginCont = async function (uid) {
+		await User.incrementUserFieldBy(uid, 'logincount', 1);
+	}
 };
